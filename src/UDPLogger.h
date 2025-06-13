@@ -44,7 +44,7 @@ public:
     logValue(INFO, key, val);
   }
   void debug(const char *msg) {
-    logChars(DEBUG, msg);
+    log(DEBUG, msg);
   }
 
 private:
