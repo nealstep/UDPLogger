@@ -26,7 +26,7 @@ void UDPLogger::setLevel(LogLevel level) {
   logLevel = level;
 }
 
-void UDPLogger::logString(LogLevel level, const String msg) {
+void UDPLogger::log(LogLevel level, const String msg) {
   if (level >= logLevel) {
     String message = String(prefix[static_cast<int>(level)]) + String(" ");
     message += msg;
@@ -49,16 +49,7 @@ void UDPLogger::logString(LogLevel level, const String msg) {
   }
 }
 
-void UDPLogger::logChars(LogLevel level, const char *msg) {
-  logString(level, String(msg));
-}
-
-void UDPLogger::logValueChars(LogLevel level, const char *name, const char *value) {
-  String message = String(name) + String(": ") + String(value);
-  logString(level, message);
-}
-
-void UDPLogger::logValueUI(LogLevel level, const char *name, uint32_t value) {
-  String message = String(name) + String(": ") + String(value);
+void UDPLogger::logValue(LogLevel level, const char *name, const String value) {
+  String message = String(name) + String(": ") + value;
   logString(level, message);
 }

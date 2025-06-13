@@ -12,21 +12,36 @@ public:
   void initUDP(const char *udp_server, const uint16_t udp_port=DEFAULT_PORT);
   void initSerial(int32_t serial_baud=DEFAULT_BAUD);
   void setLevel(LogLevel level);
-  void logString(LogLevel level, const String msg);
-  void logChars(LogLevel level, const char *msg);
-  void logValueChars(LogLevel level, const char *name, const char *value);
-  void logValueUI(LogLevel level, const char *name, uint32_t value);
+  void log(LogLevel level, const String msg);
+  void log(LogLevel level, const char *msg) {
+    log(level, String(msg));
+  }
+
+  void logValue(LogLevel level, const char *name, String value);
+  void logValue(LogLevel level, const char *name, const char *value) {
+    logValueString(INFO, name, String(value));    
+  }
+  void logValue(LogLevel level, const char *name, uint32_t value) {
+    logValueString(INFO, name, String(value));    
+  }
+  
   void error(const char *msg) {
-    logChars(ERROR, msg);
+    log(ERROR, msg);
   }
   void warning(const char *msg) {
-    logChars(WARNING, msg);
+    log(WARNING, msg);
   }
   void info(const char *msg) {
-    logChars(INFO, msg);
+    log(INFO, msg);
+  }
+  void info(const char *key, String val) {
+    logValue(INFO, key, val);
   }
   void info(const char *key, const char *val) {
-    logValueChars(INFO, key, val);
+    logValue(INFO, key, val);
+  }
+  void info(const char *key, uint32_t val) {
+    logValue(INFO, key, val);
   }
   void debug(const char *msg) {
     logChars(DEBUG, msg);
