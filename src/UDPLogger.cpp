@@ -37,6 +37,7 @@ void UDPLogger::log(LogLevel level, const String msg) {
       if (logUDP) {
         udp.beginPacket(host.c_str(), port);
         udp.write(message.c_str());
+        udp.write((const uint8_t *)message.c_str(), message.length());
         udp.endPacket();
       }
     }
