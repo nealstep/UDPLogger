@@ -53,6 +53,11 @@ void UDPLogger::logChars(LogLevel level, const char *msg) {
   logString(level, String(msg));
 }
 
+void UDPLogger::logValueChars(LogLevel level, const char *name, const char *value) {
+  String message = String(name) + String(": ") + String(value);
+  logString(level, message);
+}
+
 void UDPLogger::logValueUI(LogLevel level, const char *name, uint32_t value) {
   String message = String(name) + String(": ") + String(value);
   logString(level, message);
