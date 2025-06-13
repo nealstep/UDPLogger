@@ -2,13 +2,11 @@
 
 #if defined(ESP8266)
 #include <ESP8266WiFi.h>
-#elif defined(ESP32)
-#include <wifi.h>
 #else
 #error "Not supported"
 #endif // ESP8266
 
-#include "UDPLogger.h"
+#include <UDPLogger.h>
 
 static const char *ssid = MY_SSID;
 static const char *passwd = MY_PASSWD;
