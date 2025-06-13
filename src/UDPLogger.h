@@ -19,10 +19,10 @@ public:
 
   void logValue(LogLevel level, const char *name, String value);
   void logValue(LogLevel level, const char *name, const char *value) {
-    logValueString(INFO, name, String(value));    
+    logValue(INFO, name, String(value));    
   }
   void logValue(LogLevel level, const char *name, uint32_t value) {
-    logValueString(INFO, name, String(value));    
+    logValue(INFO, name, String(value));    
   }
   
   void error(const char *msg) {
