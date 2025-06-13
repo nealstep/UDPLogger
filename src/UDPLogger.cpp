@@ -3,7 +3,7 @@
 #if defined(ESP8266)
 #include <ESP8266WiFi.h>
 #elif defined(ESP32)
-#include <wifi.h>
+#include <WiFi.h>
 #else
 #error "Not supported"
 #endif // ESP8266
@@ -34,13 +34,7 @@ void UDPLogger::log(LogLevel level, const String msg) {
       Serial.println(message);
     }
     if (WiFi.status() == WL_CONNECTED) {
-      Serial.println("wifi up");
       if (logUDP) {
-        Serial.println("sending udp");
-        Serial.print("Host: ");
-        Serial.print(host);
-        Serial.print(" Port: ");
-        Serial.println(port);
         udp.beginPacket(host.c_str(), port);
         udp.write(message.c_str());
         udp.endPacket();
