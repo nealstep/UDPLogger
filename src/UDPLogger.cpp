@@ -46,5 +46,5 @@ void UDPLogger::log(LogLevel level, const String msg) {
 
 void UDPLogger::logValue(LogLevel level, const char *name, const String value) {
   String message = String(name) + String(": ") + value;
-  logString(level, message);
+  log(level, message);
 }
