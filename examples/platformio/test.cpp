@@ -4,7 +4,7 @@
 #include <ESP8266WiFi.h>
 #else
 #error "Not supported"
-#endif // ESP8266
+#endif  // ESP8266
 
 #include "UDPLogger.h"
 
@@ -52,14 +52,16 @@ void blink(void) {
 
 void loop() {
     currentMillis = millis();
-    if (currentMillis - previousMillis >=interval){
+    if (currentMillis - previousMillis >= interval) {
         blink();
-        switch (WiFi.status()){
+        switch (WiFi.status()) {
             case WL_NO_SSID_AVAIL:
-                udpLogger.log(udpLogger.ERROR, "Configured SSID cannot be reached");
+                udpLogger.log(udpLogger.ERROR,
+                              "Configured SSID cannot be reached");
                 break;
             case WL_CONNECTED:
-                udpLogger.log(udpLogger.INFO, "Connection successfully established");
+                udpLogger.log(udpLogger.INFO,
+                              "Connection successfully established");
                 break;
             case WL_CONNECT_FAILED:
                 udpLogger.log(udpLogger.WARNING, "Connection failed");
@@ -67,7 +69,7 @@ void loop() {
             default:
                 break;
         }
-        udpLogger.logValue(udpLogger.VALUE, "RSSI", WiFi.RSSI());
+        udpLogger.value("RSSI", WiFi.RSSI());
         interval_count++;
         if (interval_count == 10) {
             udpLogger.setLevel(udpLogger.INFO);
