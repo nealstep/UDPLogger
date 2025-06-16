@@ -3,14 +3,17 @@
 
 #include <Arduino.h>
 
-#define DEFAULT_BAUD 115200
-#define DEFAULT_PORT 4141
+#define DEFAULT_BAUD MY_BAUD
+#define DEFAULT_LOG_PORT 4141
+#define DEFAULT_DATA_PORT 4142
 
 class UDPLogger {
    public:
     enum LogLevel { DEBUG, INFO, WARNING, ERROR, VALUE, COUNT };
     void initUDP(const char *udp_server,
-                 const uint16_t udp_port = DEFAULT_PORT);
+                 const uint16_t udp_log_port = DEFAULT_LOG_PORT,
+                 const uint16_t udp_data_port = DEFAULT_DATA_PORT
+                );
     void initSerial(int32_t serial_baud = DEFAULT_BAUD);
     void setLevel(LogLevel level);
 
@@ -168,7 +171,7 @@ class UDPLogger {
     bool logSerial = false;
     bool logUDP = false;
     String host;
-    uint16_t port;
+    uint16_t log_port, data_port;
     LogLevel logLevel;
     const char prefix[static_cast<int>(LogLevel::COUNT)] = {'%', '#', '*', '!',
                                                             '$'};

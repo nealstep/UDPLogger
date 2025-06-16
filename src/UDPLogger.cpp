@@ -11,9 +11,11 @@
 
 WiFiUDP udp;
 
-void UDPLogger::initUDP(const char *udp_server, const uint16_t udp_port) {
+void UDPLogger::initUDP(const char *udp_server, const uint16_t udp_log_port,
+                        const uint16_t udp_data_port) {
     host = String(udp_server);
-    port = udp_port;
+    log_port = udp_log_port;
+    data_port = udp_data_port;
     logUDP = true;
 }
 
@@ -33,6 +35,12 @@ void UDPLogger::log(LogLevel level, const String msg) {
         }
         if (WiFi.status() == WL_CONNECTED) {
             if (logUDP) {
+                uint16_t port;
+                if (level == VALUE) {
+                    port = data_port;
+                } else {
+                    port = log_port;
+                }
                 udp.beginPacket(host.c_str(), port);
                 udp.write((const uint8_t *)message.c_str(), message.length());
                 udp.endPacket();
